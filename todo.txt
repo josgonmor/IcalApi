@@ -1,0 +1,4 @@
+-Refactor IcalManeger for posible exception
+-Llamar a los array desde un método con return
+- ver si puedo hacer que funcione el api sin requerir de castear a list
+- eliminar dependencia de jackson de jersey
