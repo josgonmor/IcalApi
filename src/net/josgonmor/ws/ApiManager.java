@@ -16,16 +16,21 @@ import jakarta.ws.rs.core.Response;
 @Path("/json")
 public class ApiManager {
 
-	private static boolean inicio = false;
-	
+	private static boolean initEvents = false;
+	private static boolean initTodos = false;
+	private static boolean initCal = false;
 	// Return all Events instances
 	@Path("/all-events")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response sendAllEvents() {
-		if(inicio==false) {
-			IcalManager.loadClasses();
-			inicio=true;
+		if(initCal==false) {
+			IcalManager.loadCalendar();
+			initCal=true;
+		}
+		if(initEvents==false) {
+			IcalManager.loadEvents();
+			initEvents=true;
 		}
 		Gson gson = new Gson();
 		ArrayList<Eventos> events = IcalManager.returnEventos();
@@ -38,9 +43,13 @@ public class ApiManager {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response sendAllTodos() {
-		if(inicio==false) {
-			IcalManager.loadClasses();
-			inicio=true;
+		if(initCal==false) {
+			IcalManager.loadCalendar();
+			initCal=true;
+		}
+		if(initTodos==false) {
+			IcalManager.loadTodos();
+			initTodos=true;
 		}
 		Gson gson = new Gson();
 		ArrayList<Todos> todos = IcalManager.returnTodos();

@@ -94,7 +94,7 @@ public class Eventos extends Modulos{
 
 
 
-	protected long getDuracion() {
+	protected int getDuracion() {
         return duracion;
     }
 
@@ -122,15 +122,36 @@ public class Eventos extends Modulos{
 
     }
 
-    private static int findDuracion(String duracionString){        
-    	String[] cad = duracionString.split("T");
-    	String aux1 = cad[1];
-    	cad = aux1.split("H");
-    	int hour = Integer.parseInt(cad[0]);
-    	aux1 = cad[1];
-    	cad = aux1.split("M");
-    	int minute= Integer.parseInt(cad[0]);
-    	return hour*60+minute; 	   	
+    private static int findDuracion(String duracionString){
+    	String [] cad= duracionString.split("T");
+    	String aux = cad[1];
+    	int hour=0;
+    	int minute=0;
+    	if (aux.contains("H")){
+    		cad = aux.split("H");
+        	hour= Integer.parseInt(cad[0]);
+        	aux = cad[1];
+    	}
+    	if (aux.contains("M")) {
+    		cad = aux.split("M");
+    		minute = Integer.parseInt(cad[0]);
+    	}
+    	return (hour*60)+minute;
+    	
+    	
+    	
+    	/*
+    	 cad = aux.split("H");
+    	int hour= Integer.parseInt(cad[0]);
+    	aux= cad[1];
+    	cad = aux.replace("M", "").split("M");
+    	aux = cad[0];
+    	int minute = Integer.parseInt(aux.trim().replace("M", ""));
+    	return (hour*60)+minute; 
+    	
+    	*/
+    	
+    	
     }
     
 
